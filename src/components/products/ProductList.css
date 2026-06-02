@@ -3,7 +3,7 @@
 
 /* Global reset & variables */
 :root {
-  --gc-bg-deep: #0f090500;
+  --gc-bg-deep: #0f0905;
   --gc-bg-surface: #1a120c;
   --gc-panel-bg: #241a12;
   --gc-card-bg: #2a1f16;
@@ -299,7 +299,7 @@
 
 .gc-avail-btn.active {
   background: var(--gc-accent-gold);
-  color: var(--gc-bg-deep);
+  color: var(--gc-bg-deep) !important;
   border-color: var(--gc-accent-gold);
 }
 
