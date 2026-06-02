@@ -26,8 +26,8 @@ const Navbar = ({ cartCount, onCartClick }) => {
         <nav className="gc-nav-links">
           <Link to="/home" className="gc-nav-link">Accueil</Link>
           <Link to="/home" className="gc-nav-link active">Boutique</Link>
-          <Link to="/about" className="gc-nav-link">À Propos</Link>
-          <Link to="/contact" className="gc-nav-link">Contact</Link>
+          {/* <Link to="/about" className="gc-nav-link">À Propos</Link> */}
+          <Link to="/home" className="gc-nav-link">Contact</Link>
         </nav>
 
         <div className="gc-nav-actions">
