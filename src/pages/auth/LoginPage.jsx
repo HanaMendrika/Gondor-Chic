@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import "./Login.css";
-import Home from "./Home";
+import "./Style.css";
+import Home from "../client/ShopPage";
 
-export default function Login() {
+export default function LoginPage() {
   const [pseudo, setPseudo] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");

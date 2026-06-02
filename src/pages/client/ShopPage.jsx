@@ -1,7 +1,7 @@
 import React from "react";
-import "./Login.css";
+import "./Style.css";
 
-export default function Home({ onLogout }) {
+export default function ShopPage({ onLogout }) {
   return (
     <div className="gc-overlay">
       <div className="gc-card">
