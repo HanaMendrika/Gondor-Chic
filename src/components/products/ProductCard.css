@@ -1,0 +1,196 @@
+/* ===== Gondor Chic — Product Card ===== */
+
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Cinzel+Decorative:wght@400;700&family=IM+Fell+English+SC&display=swap");
+
+:root {
+  --gc-bg-deep:      #1e0e07;
+  --gc-bg-card:      #7b4a2d;
+  --gc-bg-card-mid:  #8c5635;
+  --gc-bg-input:     #2a1a10;
+  --gc-border:       #9e6b44;
+  --gc-border-light: #c49060;
+  --gc-text-title:   #d4b896;
+  --gc-text-body:    #c9a87a;
+  --gc-text-muted:   #a07a55;
+  --gc-btn-bg:       #7a4d2e;
+  --gc-btn-border:   #b07848;
+  --gc-btn-text:     #dfc090;
+  --gc-btn-hover:    #8e5a36;
+  --gc-texture-line: #00000030;
+}
+
+/* Main Product Card */
+.gc-product-card {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  background-color: var(--gc-bg-card);
+  border: 3px solid var(--gc-border);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  /* Leather texture */
+  background-image:
+    repeating-linear-gradient(45deg, var(--gc-texture-line) 0px, var(--gc-texture-line) 1px, transparent 1px, transparent 26px),
+    repeating-linear-gradient(-45deg, var(--gc-texture-line) 0px, var(--gc-texture-line) 1px, transparent 1px, transparent 26px);
+
+  box-shadow: 
+    inset 0 0 0 6px var(--gc-bg-card-mid),
+    0 15px 40px rgba(0, 0, 0, 0.7);
+}
+
+.gc-product-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 
+    inset 0 0 0 6px var(--gc-bg-card-mid),
+    0 25px 60px rgba(0, 0, 0, 0.85);
+}
+
+/* Image Container */
+.gc-product-image-container {
+  position: relative;
+  height: 240px;
+  overflow: hidden;
+}
+
+.gc-product-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.gc-product-card:hover .gc-product-image {
+  transform: scale(1.08);
+}
+
+/* Badge (Category) */
+.gc-product-badge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background-color: #3f2a1d;
+  color: #e8c080;
+  font-family: "Cinzel", serif;
+  font-size: 0.75rem;
+  padding: 4px 12px;
+  border: 2px solid var(--gc-border-light);
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* Product Info */
+.gc-product-info {
+  padding: 1.4rem 1.5rem 1.6rem;
+}
+
+.gc-product-name {
+  font-family: "Cinzel Decorative", serif;
+  font-size: 1.35rem;
+  color: var(--gc-text-title);
+  margin-bottom: 0.6rem;
+  line-height: 1.2;
+}
+
+.gc-product-description {
+  font-family: "IM Fell English SC", serif;
+  font-size: 0.92rem;
+  color: var(--gc-text-body);
+  opacity: 0.9;
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+
+/* Price & Rating */
+.gc-product-price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.2rem;
+}
+
+.gc-product-price {
+  font-family: "Cinzel", serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #e8c080;
+  text-shadow: 0 2px 4px #00000080;
+}
+
+.gc-product-rating {
+  color: #d4af37;
+  font-size: 1.1rem;
+}
+
+/* Button */
+.gc-product-button {
+  width: 100%;
+  padding: 14px;
+  background-color: var(--gc-btn-bg);
+  border: 2px solid var(--gc-btn-border);
+  border-radius: 50px;
+  color: var(--gc-btn-text);
+  font-family: "Cinzel", serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.gc-product-button:hover {
+  background-color: var(--gc-btn-hover);
+  transform: translateY(-2px);
+}
+
+/* Decorative Crosses */
+.gc-cross {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  opacity: 0.25;
+  pointer-events: none;
+}
+
+.gc-cross::before,
+.gc-cross::after {
+  content: "";
+  position: absolute;
+  background: var(--gc-border-light);
+}
+
+.gc-cross::before {
+  width: 100%;
+  height: 2px;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+
+.gc-cross::after {
+  width: 2px;
+  height: 100%;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+}
+
+.gc-cross--tl { top: 12px; left: 12px; }
+.gc-cross--tr { top: 12px; right: 12px; }
+.gc-cross--bl { bottom: 12px; left: 12px; }
+.gc-cross--br { bottom: 12px; right: 12px; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .gc-product-card {
+    max-width: 100%;
+  }
+  
+  .gc-product-image-container {
+    height: 220px;
+  }
+}

@@ -1,0 +1,134 @@
+/* ===== Gondor Chic — Shop Page ===== */
+
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Cinzel+Decorative:wght@400;700&family=IM+Fell+English+SC&display=swap");
+
+.gc-shop-page {
+  min-height: 100vh;
+  background-color: #1e0e07;
+  color: #c9a87a;
+  font-family: "IM Fell English SC", serif;
+  background-image: 
+    repeating-linear-gradient(45deg, rgba(0,0,0,0.1) 0px, rgba(0,0,0,0.1) 1px, transparent 1px, transparent 26px),
+    repeating-linear-gradient(-45deg, rgba(0,0,0,0.1) 0px, rgba(0,0,0,0.1) 1px, transparent 1px, transparent 26px);
+}
+
+/* Main Shop Area */
+.gc-shop-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 3rem 5%;
+}
+
+.gc-shop-title {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+
+.gc-shop-title h2 {
+  font-family: "Cinzel Decorative", serif;
+  font-size: 3rem;
+  color: #d4b896;
+  margin-bottom: 0.8rem;
+  text-shadow: 0 4px 12px #00000090;
+}
+
+.gc-shop-title p {
+  font-family: "Cinzel", serif;
+  font-size: 1.2rem;
+  color: #c9a87a;
+  opacity: 0.9;
+}
+
+.gc-shop-decoration {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.gc-shop-cross {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+}
+
+.gc-shop-cross::before,
+.gc-shop-cross::after {
+  content: "";
+  position: absolute;
+  background-color: #c49060;
+}
+
+.gc-shop-cross::before {
+  width: 100%;
+  height: 2px;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+
+.gc-shop-cross::after {
+  width: 2px;
+  height: 100%;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+}
+
+.gc-shop-line {
+  width: 80px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #c49060, transparent);
+}
+
+/* Footer */
+.gc-shop-footer {
+  text-align: center;
+  padding: 3rem 2rem 2rem;
+  border-top: 3px solid #9e6b44;
+  background-color: #2a1a10;
+  color: #a07a55;
+  font-size: 0.95rem;
+  font-family: "Cinzel", serif;
+  margin-top: 2rem;
+}
+
+.gc-footer-content p {
+  margin: 0.5rem 0;
+}
+
+.gc-footer-runes {
+  font-family: "Cinzel Decorative", serif;
+  font-size: 1rem;
+  letter-spacing: 0.3em;
+  color: #a07a55;
+  opacity: 0.6;
+  margin-top: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .gc-shop-container {
+    padding: 2rem 1rem;
+  }
+
+  .gc-shop-title h2 {
+    font-size: 2rem;
+  }
+
+  .gc-shop-title p {
+    font-size: 1rem;
+  }
+
+  .gc-shop-line {
+    width: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .gc-shop-title h2 {
+    font-size: 1.5rem;
+  }
+}
