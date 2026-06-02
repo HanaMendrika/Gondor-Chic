@@ -6,10 +6,14 @@ const Navbar = ({ cartCount, onCartClick, onLogout }) => {
     <header className="gc-navbar">
       <div className="gc-navbar-content">
         <div className="gc-logo">
+            <img className="gc-logo-img" src='./favicon.ico'></img>
           <h1 className="gc-title">
-            <span className="gc-title-gondor">G</span>rimthars
+            <div>
+                <span className="gc-title-gondor">G</span>ondor{" "}
+                <span className="gc-title-of">or</span>{" "}
+            </div>
+            <span className="gc-title-chic">Chic</span>
           </h1>
-          <p className="gc-subtitle">Forge-Cité • Marché</p>
         </div>
 
         <nav className="gc-nav-links">

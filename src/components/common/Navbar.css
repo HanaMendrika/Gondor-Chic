@@ -26,6 +26,15 @@
 /* Logo Section */
 .gc-logo {
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 17px;
+}
+
+.gc-logo-img {
+    clip-path: circle();
+    width: 70px;
+    height: 70px;
 }
 
 .gc-title {
@@ -163,7 +172,7 @@
 
 /* Decorative Elements */
 .gc-navbar::before {
-  content: "⚔️";
+  /* content: "⚔️"; */
   position: absolute;
   left: 20px;
   top: 50%;
@@ -174,7 +183,7 @@
 }
 
 .gc-navbar::after {
-  content: "🛡️";
+  /* content: "🛡️"; */
   position: absolute;
   right: 20px;
   top: 50%;
@@ -244,4 +253,52 @@
     width: 100%;
     justify-content: center;
   }
+}
+
+/* ---- En-tête ---- */
+.gc-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.gc-title {
+  scale: 0.5;
+  transform-origin: 0 50% 0;
+  font-family: "Cinzel Decorative", "Cinzel", serif;
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--gc-text-title);
+  letter-spacing: 0.05em;
+  line-height: 1.15;
+  text-shadow: 0 2px 8px #00000060;
+}
+
+.gc-title-gondor { font-size: 2.8rem; }
+.gc-title-of {
+  font-size: 1.1rem;
+  vertical-align: super;
+  opacity: 0.75;
+  font-weight: 400;
+}
+.gc-title-chic { font-size: 2.8rem; }
+
+.gc-subtitle {
+  font-family: "Cinzel", serif;
+  font-size: 1rem;
+  color: var(--gc-text-body);
+  font-style: italic;
+  letter-spacing: 0.03em;
+  margin-top: 0.4rem;
+}
+
+.gc-divider {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--gc-border-light),
+    transparent
+  );
+  margin: 1.2rem auto 0;
+  width: 80%;
 }

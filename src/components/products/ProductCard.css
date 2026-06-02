@@ -179,8 +179,6 @@
   transform: translateX(-50%);
 }
 
-.gc-cross--tl { top: 12px; left: 12px; }
-.gc-cross--tr { top: 12px; right: 12px; }
 .gc-cross--bl { bottom: 12px; left: 12px; }
 .gc-cross--br { bottom: 12px; right: 12px; }
 

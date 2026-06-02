@@ -45,8 +45,6 @@ const ProductCard = ({
       </div>
 
       {/* Decorative crosses */}
-      <div className="gc-cross gc-cross--tl"></div>
-      <div className="gc-cross gc-cross--tr"></div>
       <div className="gc-cross gc-cross--bl"></div>
       <div className="gc-cross gc-cross--br"></div>
     </div>
