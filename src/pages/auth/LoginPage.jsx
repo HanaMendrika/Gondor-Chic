@@ -1,24 +1,22 @@
 import React, { useState } from "react";
 import "./Style.css";
-import Home from "../client/ShopPage";
+import { useNavigate, Link } from "react-router-dom";
 
 export default function LoginPage() {
   const [pseudo, setPseudo] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [loggedIn, setLoggedIn] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (pseudo === "pseudo" && password === "password") {
       setError("");
-      setLoggedIn(true);
+      navigate("/home");
     } else {
       setError("Identifiant ou mot de passe incorrect.");
     }
   };
-
-  if (loggedIn) return <Home onLogout={() => setLoggedIn(false)} />;
 
   return (
     <div className="gc-overlay">
@@ -68,7 +66,18 @@ export default function LoginPage() {
           {error && <p className="gc-error">{error}</p>}
 
           <button className="gc-button" type="submit">S'identifier</button>
+
+          <p className="gc-register">
+  Pas encore de compte ?{" "}
+  <Link to="/register" className="gc-register-link">
+    S'enregistrer
+  </Link>
+</p>
+
         </form>
+
+
+
 
         <footer className="gc-footer">
           <p>Grimthars • Forge-Cité</p>

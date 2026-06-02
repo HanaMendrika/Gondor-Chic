@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import "./RegisterPage.css";
 import "./Style.css";
 
+import { useNavigate, Link } from "react-router-dom";
+
+
 
 export default function RegisterPage() {
   const [pseudo, setPseudo] = useState("");
@@ -80,7 +83,7 @@ export default function RegisterPage() {
             </form>
 
             <p className="login-link">
-              Déjà un compte ? <a href="#">Se connecter</a>
+              Déjà un compte ? <Link to="/login">Se connecter</Link>
             </p>
           </div>
 
