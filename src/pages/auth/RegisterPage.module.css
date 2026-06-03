@@ -152,7 +152,6 @@
 /* Button */
 button {
   width: 100%;
-  margin-top: 15px;
   padding: 18px;
   background-color: var(--gc-btn-bg);
   border: 3px solid var(--gc-btn-border);

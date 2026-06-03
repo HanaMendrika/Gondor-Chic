@@ -642,8 +642,8 @@
 .gc-search-clear {
   position: absolute;
   right: 1rem;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 15%;
+  /* transform: translateY(-50%); */
   background: rgba(0,0,0,0.5);
   border: 1px solid var(--gc-border);
   color: var(--gc-text-muted);
