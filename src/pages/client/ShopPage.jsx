@@ -16,7 +16,7 @@ export default function ShopPage({ onLogout }) {
     minPrice: '',
     maxPrice: '',
     page: 0,
-    size: 12,
+    size: 5,
     sortBy: 'name',
     sortDir: 'asc'
   });

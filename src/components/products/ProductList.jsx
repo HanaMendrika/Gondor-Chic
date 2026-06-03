@@ -115,6 +115,7 @@ const ProductList = ({
         onClick={() => setSidebarOpen(!sidebarOpen)}
         aria-label="Toggle filters"
       >
+        <span className={styles['gc-toggle-icon']}>⚔</span>
         <span>Filters</span>
         {hasActiveFilters && <span className={styles['gc-toggle-badge']}></span>}
       </button>
