@@ -1,5 +1,5 @@
 // ShopPage.jsx
-import { useState, useEffect } from "react"; // Enlevez useRef
+import { useState, useEffect } from "react";
 import Navbar from "../../components/common/Navbar";
 import ProductList from "../../components/products/ProductList";
 import productService from "../../services/productService";
@@ -16,7 +16,7 @@ export default function ShopPage({ onLogout }) {
     minPrice: '',
     maxPrice: '',
     page: 0,
-    size: 5,
+    size: 12,
     sortBy: 'name',
     sortDir: 'asc'
   });
@@ -58,11 +58,12 @@ export default function ShopPage({ onLogout }) {
 
   const handleAddToCart = (product) => {
     setCartCount(prev => prev + 1);
-    alert(`⚔️ ${product.name} ajouté au panier !`);
+    // You would typically show a toast notification here instead of alert
+    console.log(`⚔️ ${product.name} ajouté au panier !`);
   };
 
   const handleCartClick = () => {
-    alert(`🛒 Vous avez ${cartCount} article(s) dans votre panier`);
+    console.log(`🛒 Vous avez ${cartCount} article(s) dans votre panier`);
   };
 
   const handleQuickView = (productId) => {
@@ -74,7 +75,7 @@ export default function ShopPage({ onLogout }) {
     setFilters(prev => ({
       ...prev,
       ...newFilters,
-      page: 0 // Reset à la première page
+      page: 0
     }));
   };
 
@@ -96,7 +97,9 @@ export default function ShopPage({ onLogout }) {
           onLogout={onLogout}
         />
         <div className={styles["gc-loading-container"]}>
-          <div className={styles["gc-loading-spinner"]}></div>
+          <div className={styles["gc-loading-spinner"]}>
+            <div className={styles["gc-spinner-rune"]}>⚔️</div>
+          </div>
           <p>Chargement des équipements de la forge...</p>
         </div>
       </div>
@@ -112,7 +115,8 @@ export default function ShopPage({ onLogout }) {
           onLogout={onLogout}
         />
         <div className={styles["gc-error-container"]}>
-          <p>❌ {error}</p>
+          <div className={styles["gc-error-icon"]}>⚔️❌⚔️</div>
+          <p>{error}</p>
           <button onClick={loadProducts} className={styles["gc-retry-btn"]}>
             Réessayer
           </button>
@@ -129,17 +133,23 @@ export default function ShopPage({ onLogout }) {
         onLogout={onLogout}
       />
 
-      <div className={styles["gc-shop-container"]}>
-        <div className={styles["gc-shop-title"]}>
-          <h2>Bienvenue à la Grande Forge-Marché</h2>
-          <p>Équipez-vous pour la gloire de la Montagne</p>
-          <div className={styles["gc-shop-decoration"]}>
-            <span className={styles["gc-shop-cross"]}></span>
-            <span className={styles["gc-shop-line"]}></span>
-            <span className={styles["gc-shop-cross"]}></span>
+      {/* Hero Banner */}
+      <div className={styles["gc-shop-hero"]}>
+        <div className={styles["gc-hero-overlay"]}></div>
+        <div className={styles["gc-hero-content"]}>
+          <div className={styles["gc-hero-runes-left"]}>ᚱ ᚨ ᚢ</div>
+          <h1>La Grande Forge-Marché</h1>
+          <div className={styles["gc-hero-divider"]}>
+            <span className={styles["gc-hero-cross"]}></span>
+            <span className={styles["gc-hero-line"]}></span>
+            <span className={styles["gc-hero-cross"]}></span>
           </div>
+          <p>Équipez-vous pour la gloire de la Montagne</p>
+          <div className={styles["gc-hero-runes-right"]}>ᚾ ᛟ ᛗ</div>
         </div>
+      </div>
 
+      <div className={styles["gc-shop-container"]}>
         <ProductList 
           products={products}
           loading={loading}
@@ -153,8 +163,10 @@ export default function ShopPage({ onLogout }) {
       </div>
 
       <footer className={styles["gc-shop-footer"]}>
+        <div className={styles["gc-footer-glow"]}></div>
         <div className={styles["gc-footer-content"]}>
-          <p>⚔️ Grimthars • Forge-Cité • Troisième Âge ⚔️</p>
+          <div className={styles["gc-footer-sigil"]}>⚔️</div>
+          <p>Grimthars • Forge-Cité • Troisième Âge</p>
           <p>Tous les articles sont forgés avec honneur</p>
           <div className={styles["gc-footer-runes"]}>ᚱ ᚨ ᚢ ᚾ ᛟ</div>
         </div>

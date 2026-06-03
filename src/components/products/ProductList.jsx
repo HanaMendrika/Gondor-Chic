@@ -1,4 +1,4 @@
-// ProductList.jsx — Gondor Chic · Elevated Edition
+// ProductList.jsx — Gondor Chic · Édition Élevée
 import { useState, useEffect } from 'react';
 import styles from './ProductList.module.css';
 import ProductCard from './ProductCard';
@@ -95,56 +95,56 @@ const ProductList = ({
           <div className={styles['gc-loading-ring']} style={{ animationDelay: '-0.4s' }}></div>
           <div className={styles['gc-loading-core']}></div>
         </div>
-        <p className={styles['gc-loading-text']}>Summoning Artefacts…</p>
+        <p className={styles['gc-loading-text']}>Invocation des Artéfacts…</p>
       </div>
     );
   }
 
   return (
     <div className={styles['gc-shop-container']}>
-      {/* Ambient background layers */}
+      {/* Couches d'arrière-plan ambiant */}
       <div className={styles['gc-bg-layer']} aria-hidden="true">
         <div className={styles['gc-bg-glow-left']}></div>
         <div className={styles['gc-bg-glow-right']}></div>
         <div className={styles['gc-bg-noise']}></div>
       </div>
 
-      {/* Mobile toggle */}
+      {/* Bouton mobile */}
       <button
         className={styles['gc-mobile-filter-toggle']}
         onClick={() => setSidebarOpen(!sidebarOpen)}
-        aria-label="Toggle filters"
+        aria-label="Basculer les filtres"
       >
         <span className={styles['gc-toggle-icon']}>⚔</span>
-        <span>Filters</span>
+        <span>Filtres</span>
         {hasActiveFilters && <span className={styles['gc-toggle-badge']}></span>}
       </button>
 
       <div className={styles['gc-shop-layout']}>
-        {/* ── SIDEBAR ── */}
+        {/* ── BARRE LATÉRALE ── */}
         <aside className={`${styles['gc-sidebar']} ${sidebarOpen ? styles['open'] : ''}`}>
-          {/* Decorative top bar */}
+          {/* Barre décorative supérieure */}
           <div className={styles['gc-sidebar-topbar']} aria-hidden="true">
             <span></span><span></span><span></span>
           </div>
 
           <div className={styles['gc-sidebar-header']}>
             <div className={styles['gc-sidebar-emblem']} aria-hidden="true">✦</div>
-            <h3 className={styles['gc-sidebar-title']}>Filter Armory</h3>
-            <p className={styles['gc-sidebar-subtitle']}>Refine your quest</p>
+            <h3 className={styles['gc-sidebar-title']}>Armurerie de Filtres</h3>
+            <p className={styles['gc-sidebar-subtitle']}>Affinez votre quête</p>
           </div>
 
-          {/* Categories */}
+          {/* Catégories */}
           <div className={styles['gc-filter-section']}>
             <div className={styles['gc-filter-section-header']}>
-              <span className={styles['gc-section-icon']}>⬡</span>
-              <h4>Realms & Collections</h4>
+              <span className={styles['gc-section-icon']}>◈</span>
+              <h4>Royaumes & Collections</h4>
             </div>
             <div className={styles['gc-category-search']}>
               <span className={styles['gc-cat-search-icon']}>⌕</span>
               <input
                 type="text"
-                placeholder="Search categories…"
+                placeholder="Rechercher une catégorie…"
                 value={categorySearchQuery}
                 onChange={e => setCategorySearchQuery(e.target.value)}
                 className={styles['gc-category-search-input']}
@@ -168,17 +168,17 @@ const ProductList = ({
                 ))
               ) : (
                 <div className={styles['gc-no-categories']}>
-                  <span>☽</span> No realms found…
+                  <span>☽</span> Aucun royaume trouvé…
                 </div>
               )}
             </div>
           </div>
 
-          {/* Price */}
+          {/* Prix */}
           <div className={styles['gc-filter-section']}>
             <div className={styles['gc-filter-section-header']}>
               <span className={styles['gc-section-icon']}>◈</span>
-              <h4>Price Range</h4>
+              <h4>Fourchette de Prix</h4>
             </div>
             <div className={styles['gc-price-range']}>
               <div className={styles['gc-price-input-group']}>
@@ -203,7 +203,7 @@ const ProductList = ({
                 />
               </div>
             </div>
-            <div className={styles['gc-price-slider']}>
+            {/* <div className={styles['gc-price-slider']}>
               <input
                 type="range"
                 min="0"
@@ -215,38 +215,38 @@ const ProductList = ({
               <div className={styles['gc-slider-track-fill']}
                 style={{ width: `${((localMaxPrice || maxPossiblePrice) / maxPossiblePrice) * 100}%` }}
               ></div>
-            </div>
+            </div> */}
           </div>
 
-          {/* Availability */}
+          {/* Disponibilité */}
           <div className={styles['gc-filter-section']}>
             <div className={styles['gc-filter-section-header']}>
-              <span className={styles['gc-section-icon']}>⬟</span>
-              <h4>Availability</h4>
+              <span className={styles['gc-section-icon']}>◈</span>
+              <h4>Disponibilité</h4>
             </div>
             <div className={styles['gc-availability-options']}>
               <button
                 className={`${styles['gc-avail-btn']} ${localInStock === true ? styles['active'] : ''}`}
                 onClick={() => handleStockFilter(true)}
               >
-                <span className={styles['gc-avail-dot']} data-state="in"></span> In Stock Only
+                <span className={styles['gc-avail-dot']} data-state="in"></span> En Stock Uniquement
               </button>
               <button
                 className={`${styles['gc-avail-btn']} ${localInStock === false ? styles['active'] : ''}`}
                 onClick={() => handleStockFilter(false)}
               >
-                <span className={styles['gc-avail-dot']} data-state="out"></span> Out of Stock
+                <span className={styles['gc-avail-dot']} data-state="out"></span> Rupture de Stock
               </button>
             </div>
           </div>
 
-          {/* Active filters */}
+          {/* Filtres actifs */}
           {hasActiveFilters && (
             <div className={styles['gc-active-filters-sidebar']}>
               <div className={styles['gc-active-header']}>
-                <span>Active filters</span>
+                <span>Filtres actifs</span>
                 <button onClick={clearFilters} className={styles['gc-clear-all-btn']}>
-                  ✕ Clear all
+                  ✕ Tout effacer
                 </button>
               </div>
               <div className={styles['gc-active-tags']}>
@@ -264,25 +264,25 @@ const ProductList = ({
                 )}
                 {filters.minPrice && (
                   <span className={styles['gc-active-tag']}>
-                    From ${filters.minPrice}
+                    À partir de ${filters.minPrice}
                     <button onClick={() => { setLocalMinPrice(''); onFilterChange({ minPrice: '', page: 0 }); }}>×</button>
                   </span>
                 )}
                 {filters.maxPrice && (
                   <span className={styles['gc-active-tag']}>
-                    To ${filters.maxPrice}
+                    Jusqu'à ${filters.maxPrice}
                     <button onClick={() => { setLocalMaxPrice(''); onFilterChange({ maxPrice: '', page: 0 }); }}>×</button>
                   </span>
                 )}
                 {filters.inStock === true && (
                   <span className={styles['gc-active-tag']}>
-                    In Stock
+                    En Stock
                     <button onClick={() => { setLocalInStock(null); onFilterChange({ inStock: null, page: 0 }); }}>×</button>
                   </span>
                 )}
                 {filters.inStock === false && (
                   <span className={styles['gc-active-tag']}>
-                    Out of Stock
+                    Rupture
                     <button onClick={() => { setLocalInStock(null); onFilterChange({ inStock: null, page: 0 }); }}>×</button>
                   </span>
                 )}
@@ -295,27 +295,17 @@ const ProductList = ({
           </div>
         </aside>
 
-        {/* ── MAIN CONTENT ── */}
+        {/* ── CONTENU PRINCIPAL ── */}
         <main className={styles['gc-main-content']}>
-          {/* Hero header */}
+          {/* En-tête principal */}
           <div className={styles['gc-content-header']}>
-            <div className={styles['gc-title-section']}>
-              <div className={styles['gc-title-ornament']} aria-hidden="true">
-                <span></span><span>✦</span><span></span>
-              </div>
-              <h1 className={styles['gc-shop-title']}>Armory of Gondor</h1>
-              <p className={styles['gc-shop-description']}>
-                Forged in the fires of the White City — modern heirlooms for legendary homes
-              </p>
-            </div>
-
-            {/* Search */}
+            {/* Barre de recherche */}
             <div className={styles['gc-search-bar']}>
               <div className={styles['gc-search-input-wrapper']}>
                 <span className={styles['gc-search-icon']}>⌕</span>
                 <input
                   type="text"
-                  placeholder="Search for treasures by name, description, or category…"
+                  placeholder="Recherchez un trésor par nom, description ou catégorie…"
                   value={localSearch}
                   onChange={e => setLocalSearch(e.target.value)}
                   className={styles['gc-global-search']}
@@ -324,38 +314,38 @@ const ProductList = ({
                   <button
                     className={styles['gc-search-clear']}
                     onClick={() => { setLocalSearch(''); onFilterChange({ search: '', page: 0 }); }}
-                    aria-label="Clear search"
+                    aria-label="Effacer la recherche"
                   >×</button>
                 )}
               </div>
             </div>
 
-            {/* Sort bar */}
+            {/* Barre de tri */}
             <div className={styles['gc-sorting-bar']}>
               <div className={styles['gc-results-stats']}>
                 <span className={styles['gc-stats-gem']}>◆</span>
                 <span>
                   <strong>{pagination.totalElements || products.length}</strong>
-                  {' '}noble piece{products.length !== 1 ? 's' : ''}
+                  {' '}pièce{products.length !== 1 ? 's' : ''} noble{products.length !== 1 ? 's' : ''}
                 </span>
               </div>
               <div className={styles['gc-sort-group']}>
-                <label className={styles['gc-sort-label']}>Sort by</label>
+                <label className={styles['gc-sort-label']}>Trier par</label>
                 <select
                   className={styles['gc-sort-select']}
                   value={`${filters.sortBy}-${filters.sortDir}`}
                   onChange={handleSortChange}
                 >
-                  <option value="name-asc">Name: A → Z</option>
-                  <option value="name-desc">Name: Z → A</option>
-                  <option value="price-asc">Price: Low → High</option>
-                  <option value="price-desc">Price: High → Low</option>
+                  <option value="name-asc">Nom : A → Z</option>
+                  <option value="name-desc">Nom : Z → A</option>
+                  <option value="price-asc">Prix : Croissant</option>
+                  <option value="price-desc">Prix : Décroissant</option>
                 </select>
               </div>
             </div>
           </div>
 
-          {/* Product Grid */}
+          {/* Grille de produits */}
           {products.length > 0 ? (
             <>
               <div className={styles['gc-product-grid']}>
@@ -385,18 +375,18 @@ const ProductList = ({
 
               {/* Pagination */}
               {pagination.totalPages > 1 && (
-                <nav className={styles['gc-pagination']} aria-label="Page navigation">
+                <nav className={styles['gc-pagination']} aria-label="Navigation des pages">
                   <button
                     onClick={() => onPageChange(0)}
                     disabled={pagination.currentPage === 0}
                     className={`${styles['gc-page-btn']} ${styles['gc-page-edge']}`}
-                    aria-label="First page"
+                    aria-label="Première page"
                   >«</button>
                   <button
                     onClick={() => onPageChange(pagination.currentPage - 1)}
                     disabled={pagination.currentPage === 0}
                     className={styles['gc-page-btn']}
-                    aria-label="Previous page"
+                    aria-label="Page précédente"
                   >‹</button>
 
                   <span className={styles['gc-page-info']}>
@@ -409,13 +399,13 @@ const ProductList = ({
                     onClick={() => onPageChange(pagination.currentPage + 1)}
                     disabled={pagination.currentPage === pagination.totalPages - 1}
                     className={styles['gc-page-btn']}
-                    aria-label="Next page"
+                    aria-label="Page suivante"
                   >›</button>
                   <button
                     onClick={() => onPageChange(pagination.totalPages - 1)}
                     disabled={pagination.currentPage === pagination.totalPages - 1}
                     className={`${styles['gc-page-btn']} ${styles['gc-page-edge']}`}
-                    aria-label="Last page"
+                    aria-label="Dernière page"
                   >»</button>
                 </nav>
               )}
@@ -425,12 +415,12 @@ const ProductList = ({
               <div className={styles['gc-empty-sigil']} aria-hidden="true">
                 <span>♛</span>
               </div>
-              <p className={styles['gc-empty-text']}>No treasures found in these realms…</p>
+              <p className={styles['gc-empty-text']}>Aucun trésor trouvé dans ces royaumes…</p>
               <p className={styles['gc-empty-hint']}>
-                Adjust your filters or explore other collections
+                Modifiez vos filtres ou explorez d'autres collections
               </p>
               <button className={styles['gc-empty-btn']} onClick={clearFilters}>
-                ↺ Clear All Filters
+                ↺ Effacer tous les filtres
               </button>
             </div>
           )}

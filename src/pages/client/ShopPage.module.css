@@ -1,134 +1,387 @@
-/* ===== Gondor Chic — Shop Page ===== */
-
-@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Cinzel+Decorative:wght@400;700&family=IM+Fell+English+SC&display=swap");
+/* ShopPage.module.css */
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;900&family=Cinzel+Decorative:wght@400;700;900&family=IM+Fell+English+SC&family=MedievalSharp&display=swap");
 
 .gc-shop-page {
   min-height: 100vh;
-  background-color: #1e0e07;
-  color: #c9a87a;
+  background: linear-gradient(135deg, #120a05 0%, #1e0e07 50%, #0d0704 100%);
+  color: #e6d5b8;
   font-family: "IM Fell English SC", serif;
+}
+
+.gc-shop-page::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background-image: 
-    repeating-linear-gradient(45deg, rgba(0,0,0,0.1) 0px, rgba(0,0,0,0.1) 1px, transparent 1px, transparent 26px),
-    repeating-linear-gradient(-45deg, rgba(0,0,0,0.1) 0px, rgba(0,0,0,0.1) 1px, transparent 1px, transparent 26px);
+    repeating-linear-gradient(45deg, rgba(201, 168, 122, 0.03) 0px, rgba(201, 168, 122, 0.03) 1px, transparent 1px, transparent 30px),
+    repeating-linear-gradient(-45deg, rgba(201, 168, 122, 0.03) 0px, rgba(201, 168, 122, 0.03) 1px, transparent 1px, transparent 30px);
+  pointer-events: none;
+  z-index: 0;
 }
 
-/* Main Shop Area */
-.gc-shop-container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 3rem 0%;
-}
-
-.gc-shop-title {
-  text-align: center;
-  margin-bottom: 3.5rem;
-}
-
-.gc-shop-title h2 {
-  font-family: "Cinzel Decorative", serif;
-  font-size: 3rem;
-  color: #d4b896;
-  margin-bottom: 0.8rem;
-  text-shadow: 0 4px 12px #00000090;
-}
-
-.gc-shop-title p {
-  font-family: "Cinzel", serif;
-  font-size: 1.2rem;
-  color: #c9a87a;
-  opacity: 0.9;
-}
-
-.gc-shop-decoration {
+/* Hero Banner */
+.gc-shop-hero {
+  position: relative;
+  height: 55vh;
+  min-height: 450px;
+  background: url('https://www.transparenttextures.com/patterns/wood-pattern.png'), 
+              radial-gradient(ellipse at center, #4a2a1a 0%, #1e0e07 100%);
+  background-blend-mode: overlay;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
-  margin-top: 1.5rem;
+  text-align: center;
+  margin-bottom: 3rem;
+  border-bottom: 2px solid #c49060;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
-.gc-shop-cross {
+.gc-hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(30, 14, 7, 0) 60%, rgba(13, 7, 4, 0.85) 130%);
+}
+
+.gc-hero-content {
   position: relative;
-  width: 20px;
-  height: 20px;
-  display: inline-block;
+  z-index: 2;
+  padding: 0 2rem;
 }
 
-.gc-shop-cross::before,
-.gc-shop-cross::after {
+.gc-hero-content h1 {
+  font-family: "Cinzel Decorative", serif;
+  font-size: 4.5rem;
+  font-weight: 700;
+  color: #f0dbb4;
+  text-shadow: 0 0 20px rgba(196, 144, 96, 0.5), 0 4px 15px rgba(0, 0, 0, 0.8);
+  letter-spacing: 4px;
+  margin-bottom: 1rem;
+}
+
+.gc-hero-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.gc-hero-cross {
+  position: relative;
+  width: 24px;
+  height: 24px;
+}
+
+.gc-hero-cross::before,
+.gc-hero-cross::after {
   content: "";
   position: absolute;
-  background-color: #c49060;
+  background: linear-gradient(135deg, #d4a373, #c49060);
+  box-shadow: 0 0 8px rgba(196, 144, 96, 0.6);
 }
 
-.gc-shop-cross::before {
+.gc-hero-cross::before {
   width: 100%;
-  height: 2px;
+  height: 2.5px;
   top: 50%;
   left: 0;
   transform: translateY(-50%);
 }
 
-.gc-shop-cross::after {
-  width: 2px;
+.gc-hero-cross::after {
+  width: 2.5px;
   height: 100%;
   left: 50%;
   top: 0;
   transform: translateX(-50%);
 }
 
-.gc-shop-line {
+.gc-hero-line {
+  width: 120px;
+  height: 2.5px;
+  background: linear-gradient(90deg, transparent, #d4a373, #c49060, #d4a373, transparent);
+  box-shadow: 0 0 6px rgba(196, 144, 96, 0.5);
+}
+
+.gc-hero-content p {
+  font-family: "Cinzel", serif;
+  font-size: 1.4rem;
+  color: #d4b896;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  letter-spacing: 2px;
+  margin-top: 1rem;
+}
+
+.gc-hero-runes-left,
+.gc-hero-runes-right {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: "Cinzel Decorative", serif;
+  font-size: 2rem;
+  color: rgba(196, 144, 96, 0.4);
+  letter-spacing: 8px;
+  writing-mode: horizontal-tb;
+}
+
+.gc-hero-runes-left {
+  left: 5%;
+}
+
+.gc-hero-runes-right {
+  right: 5%;
+}
+
+/* Main Shop Area */
+.gc-shop-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 3rem 3rem;
+  border-radius: 8px;
+}
+
+/* Loading State */
+.gc-loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  gap: 2rem;
+}
+
+.gc-loading-spinner {
   width: 80px;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #c49060, transparent);
+  height: 80px;
+  border: 3px solid rgba(196, 144, 96, 0.2);
+  border-top: 3px solid #c49060;
+  border-right: 3px solid #d4a373;
+  border-radius: 50%;
+  animation: gc-spin 1s linear infinite;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gc-spinner-rune {
+  position: absolute;
+  font-size: 2rem;
+  animation: gc-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes gc-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes gc-pulse {
+  0%, 100% { opacity: 0.5; transform: scale(0.9); }
+  50% { opacity: 1; transform: scale(1.1); }
+}
+
+.gc-loading-container p {
+  font-size: 1.2rem;
+  color: #d4b896;
+  letter-spacing: 2px;
+}
+
+/* Error State */
+.gc-error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  gap: 1.5rem;
+  text-align: center;
+}
+
+.gc-error-icon {
+  font-size: 3rem;
+  filter: drop-shadow(0 0 10px rgba(196, 144, 96, 0.5));
+}
+
+.gc-error-container p {
+  font-size: 1.2rem;
+  color: #e6c8a0;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  border-left: 4px solid #c49060;
+}
+
+.gc-retry-btn {
+  background: linear-gradient(135deg, #4a2a1a, #2a1a10);
+  border: 1px solid #c49060;
+  color: #f0dbb4;
+  padding: 0.8rem 2rem;
+  font-family: "Cinzel", serif;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 4px;
+  letter-spacing: 2px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.gc-retry-btn:hover {
+  background: linear-gradient(135deg, #5e3622, #3a2012);
+  border-color: #d4a373;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+  color: #ffe8c7;
 }
 
 /* Footer */
 .gc-shop-footer {
+  position: relative;
   text-align: center;
-  padding: 3rem 2rem 2rem;
-  border-top: 3px solid #9e6b44;
-  background-color: #2a1a10;
-  color: #a07a55;
-  font-size: 0.95rem;
-  font-family: "Cinzel", serif;
-  margin-top: 2rem;
+  padding: 3rem 2rem;
+  background: linear-gradient(180deg, #1a0e08 0%, #0d0704 100%);
+  border-top: 1px solid rgba(196, 144, 96, 0.3);
+  margin-top: 4rem;
+  overflow: hidden;
+}
+
+.gc-footer-glow {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 300px;
+  height: 2px;
+  background: radial-gradient(ellipse at center, #c49060, transparent);
+}
+
+.gc-footer-content {
+  position: relative;
+  z-index: 1;
+}
+
+.gc-footer-sigil {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 0 8px rgba(196, 144, 96, 0.6));
+  animation: gc-sigil-glow 3s ease-in-out infinite;
+}
+
+@keyframes gc-sigil-glow {
+  0%, 100% { filter: drop-shadow(0 0 4px rgba(196, 144, 96, 0.4)); }
+  50% { filter: drop-shadow(0 0 12px rgba(196, 144, 96, 0.8)); }
 }
 
 .gc-footer-content p {
   margin: 0.5rem 0;
+  font-size: 0.95rem;
+  letter-spacing: 1px;
+}
+
+.gc-footer-content p:first-of-type {
+  font-family: "Cinzel", serif;
+  font-weight: 500;
+  color: #c9a87a;
 }
 
 .gc-footer-runes {
   font-family: "Cinzel Decorative", serif;
-  font-size: 1rem;
-  letter-spacing: 0.3em;
-  color: #a07a55;
-  opacity: 0.6;
-  margin-top: 1rem;
+  font-size: 1.2rem;
+  letter-spacing: 0.5em;
+  color: #8a684a;
+  margin-top: 1.5rem;
+  opacity: 0.7;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
+/* Responsive Design */
+@media (max-width: 1024px) {
   .gc-shop-container {
-    padding: 2rem 1rem;
+    padding: 0 2rem 2rem;
   }
-
-  .gc-shop-title h2 {
-    font-size: 2rem;
+  
+  .gc-hero-content h1 {
+    font-size: 3.5rem;
   }
+  
+  .gc-hero-runes-left,
+  .gc-hero-runes-right {
+    font-size: 1.5rem;
+    letter-spacing: 4px;
+  }
+}
 
-  .gc-shop-title p {
+@media (max-width: 768px) {
+  .gc-shop-hero {
+    height: 45vh;
+    min-height: 350px;
+  }
+  
+  .gc-hero-content h1 {
+    font-size: 2.2rem;
+    letter-spacing: 2px;
+  }
+  
+  .gc-hero-content p {
     font-size: 1rem;
   }
-
-  .gc-shop-line {
-    width: 40px;
+  
+  .gc-hero-divider {
+    gap: 1rem;
+  }
+  
+  .gc-hero-line {
+    width: 60px;
+  }
+  
+  .gc-hero-runes-left,
+  .gc-hero-runes-right {
+    display: none;
+  }
+  
+  .gc-shop-container {
+    padding: 0 1rem 2rem;
+  }
+  
+  .gc-footer-content p {
+    font-size: 0.8rem;
+  }
+  
+  .gc-footer-runes {
+    font-size: 0.9rem;
+    letter-spacing: 0.3em;
   }
 }
 
 @media (max-width: 480px) {
-  .gc-shop-title h2 {
-    font-size: 1.5rem;
+  .gc-shop-hero {
+    height: 35vh;
+    min-height: 280px;
+  }
+  
+  .gc-hero-content h1 {
+    font-size: 1.6rem;
+  }
+  
+  .gc-hero-content p {
+    font-size: 0.8rem;
+  }
+  
+  .gc-hero-line {
+    width: 40px;
+  }
+  
+  .gc-hero-cross {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .gc-retry-btn {
+    padding: 0.6rem 1.5rem;
+    font-size: 0.9rem;
   }
 }
