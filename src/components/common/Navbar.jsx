@@ -1,46 +1,83 @@
-import React from 'react';
-import './Navbar.css';
-import { Link, useNavigate } from 'react-router-dom';
+import styles from './Navbar.module.css';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
-const Navbar = ({ cartCount, onCartClick }) => {
-  const navigate = useNavigate();
+const NAV_LINKS = [
+  { to: '/home',    label: 'Accueil'  },
+  { to: '/shop',    label: 'Boutique' },
+  { to: '/contact', label: 'Contact'  },
+];
 
-  const handleLogout = () => {
-    navigate("/login");
-  };
+const Navbar = ({ cartCount = 0, onCartClick }) => {
+  const navigate  = useNavigate();
+  const { pathname } = useLocation();
+
+  const handleLogout = () => navigate('/login');
 
   return (
-    <header className="gc-navbar">
-      <div className="gc-navbar-content">
-        <div className="gc-logo">
-          <img className="gc-logo-img" src='./favicon.ico' />
-          <h1 className="gc-title">
-            <div>
-              <span className="gc-title-gondor">G</span>ondor{" "}
-              <span className="gc-title-of">or</span>{" "}
-            </div>
-            <span className="gc-title-chic">Chic</span>
-          </h1>
-        </div>
+    <header className={styles["gc-navbar"]}>
+      <div className={styles["gc-navbar-content"]}>
 
-        <nav className="gc-nav-links">
-          <Link to="/home" className="gc-nav-link">Accueil</Link>
-          <Link to="/home" className="gc-nav-link active">Boutique</Link>
-          {/* <Link to="/about" className="gc-nav-link">À Propos</Link> */}
-          <Link to="/home" className="gc-nav-link">Contact</Link>
+        {/* ── Logo ── */}
+        <Link to="/home" className={styles["gc-logo"]} aria-label="Gondor Chic — Accueil">
+          <div className={styles["gc-logo-img-wrapper"]}>
+            <img
+              className={styles["gc-logo-img"]}
+              src="./favicon.ico"
+              alt="Gondor Chic Logo"
+            />
+          </div>
+          <div className={styles["gc-title-wrapper"]}>
+            <div className={styles["gc-wordmark"]}>
+              <span className={styles["gc-title-gondor"]}>Gondor</span>
+              <span className={styles["gc-title-or"]}>or</span>
+              <span className={styles["gc-title-chic"]}>Chic</span>
+            </div>
+          </div>
+        </Link>
+
+        {/* ── Navigation ── */}
+        <nav aria-label="Navigation principale">
+          <ul className={styles["gc-nav-links"]}>
+            {NAV_LINKS.map(({ to, label }) => (
+              <li key={to}>
+                <Link
+                  to={to}
+                  className={`${styles["gc-nav-link"]}${pathname === to ? ` ${styles["active"]}` : ''}`}
+                >
+                  {label}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </nav>
 
-        <div className="gc-nav-actions">
-          <button className="gc-cart-button" onClick={onCartClick}>
-            <span className="gc-cart-icon">🛒</span>
-            Cart
-            <span className="gc-cart-count">({cartCount})</span>
+
+        {/* ── Actions ── */}
+        <div className={styles["gc-nav-actions"]}>
+          <button
+            className={styles["gc-cart-button"]}
+            onClick={onCartClick}
+            aria-label={`Panier — ${cartCount} article${cartCount !== 1 ? 's' : ''}`}
+          >
+            <span className={styles["gc-cart-icon"]} aria-hidden="true">🛒</span>
+            Panier
+            {cartCount > 0 && (
+              <span className={styles["gc-cart-count"]} aria-hidden="true">
+                {cartCount}
+              </span>
+            )}
           </button>
-          <button className="gc-logout-button" onClick={handleLogout}>
-            <span className="gc-logout-icon">⚔️</span>
-            Se déconnecter
+
+          <button
+            className={styles["gc-logout-button"]}
+            onClick={handleLogout}
+            aria-label="Se déconnecter"
+          >
+            <span className={styles["gc-logout-icon"]} aria-hidden="true">⚔️</span>
+            Déconnexion
           </button>
         </div>
+
       </div>
     </header>
   );

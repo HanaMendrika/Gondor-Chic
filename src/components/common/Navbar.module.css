@@ -1,0 +1,409 @@
+/* ===== Gondor Chic — Navbar (Enhanced) ===== */
+
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cinzel+Decorative:wght@400;700&family=IM+Fell+English+SC&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap");
+
+/* ── CSS Variables ── */
+:root {
+  --gc-gold-deep:    #c49060;
+  --gc-gold-bright:  #e8c080;
+  --gc-gold-shine:   #f0d090;
+  --gc-gold-badge:   #d4af37;
+  --gc-brown-dark:   #1a0e08;
+  --gc-brown-mid:    #2a1a10;
+  --gc-brown-light:  #3f2a1d;
+  --gc-text-nav:     #c9a87a;
+  --gc-text-bright:  #eedcb8;
+  --gc-border:       #6b3f22;
+  --gc-glow:         rgba(212, 175, 55, 0.18);
+}
+
+/* ── Navbar Shell ── */
+.gc-navbar {
+  background: linear-gradient(
+    180deg,
+    #1a0e08 0%,
+    #2a1a10 60%,
+    #221408 100%
+  );
+  border-bottom: 1px solid var(--gc-border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow:
+    0 1px 0 rgba(196, 144, 96, 0.15),
+    0 6px 32px rgba(0, 0, 0, 0.7),
+    0 1px 60px rgba(0,0,0,0.5);
+}
+
+/* Top ornamental rule */
+.gc-navbar::before {
+  content: '';
+  display: block;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--gc-border) 15%,
+    var(--gc-gold-deep) 40%,
+    var(--gc-gold-bright) 50%,
+    var(--gc-gold-deep) 60%,
+    var(--gc-border) 85%,
+    transparent 100%
+  );
+}
+
+/* Bottom ornamental rule */
+.gc-navbar::after {
+  content: '';
+  display: block;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(196,144,96,0.3) 30%,
+    rgba(196,144,96,0.6) 50%,
+    rgba(196,144,96,0.3) 70%,
+    transparent 100%
+  );
+}
+
+/* ── Inner content ── */
+.gc-navbar-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 5%;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 2rem;
+  min-height: 78px;
+}
+
+/* ── Logo ── */
+.gc-logo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.gc-logo-img-wrapper {
+  position: relative;
+  width: 52px;
+  height: 52px;
+  flex-shrink: 0;
+}
+
+.gc-logo-img-wrapper::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    var(--gc-border),
+    var(--gc-gold-deep) 30%,
+    var(--gc-gold-bright) 50%,
+    var(--gc-gold-deep) 70%,
+    var(--gc-border) 100%
+  );
+  animation: spin-ring 12s linear infinite;
+}
+
+@keyframes spin-ring {
+  to { transform: rotate(360deg); }
+}
+
+.gc-logo-img {
+  position: relative;
+  z-index: 1;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  border: 2px solid var(--gc-brown-dark);
+}
+
+/* Title text block */
+.gc-title-wrapper {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+  gap: 2px;
+}
+
+.gc-wordmark {
+  display: flex;
+  align-items: baseline;
+  gap: 0.35em;
+}
+
+.gc-title-gondor {
+  font-family: "Cinzel Decorative", serif;
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: var(--gc-gold-bright);
+  letter-spacing: 0.06em;
+  text-shadow:
+    0 0 12px rgba(232, 192, 128, 0.4),
+    0 2px 4px rgba(0,0,0,0.6);
+  line-height: 1;
+}
+
+.gc-title-or {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 0.85rem;
+  color: var(--gc-gold-deep);
+  letter-spacing: 0.05em;
+  opacity: 0.85;
+}
+
+.gc-title-chic {
+  font-family: "Cinzel Decorative", serif;
+  font-size: 1.55rem;
+  font-weight: 400;
+  color: var(--gc-text-nav);
+  letter-spacing: 0.1em;
+  line-height: 1;
+}
+
+.gc-subtitle {
+  font-family: "IM Fell English SC", serif;
+  font-size: 0.6rem;
+  color: #7a5a35;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  margin-top: 3px;
+}
+
+/* ── Navigation links ── */
+.gc-nav-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.gc-nav-link {
+  font-family: "Cinzel", serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--gc-text-nav);
+  text-decoration: none;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.55rem 1.6rem;
+  position: relative;
+  transition: color 0.25s ease;
+  white-space: nowrap;
+}
+
+/* Separator rune between links */
+.gc-nav-link + .gc-nav-link::before {
+  content: '✦';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.5rem;
+  color: var(--gc-border);
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Underline reveal */
+.gc-nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  width: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--gc-gold-bright),
+    transparent
+  );
+  transition: width 0.3s ease, left 0.3s ease;
+}
+
+.gc-nav-link:hover {
+  color: var(--gc-gold-shine);
+}
+
+.gc-nav-link:hover::after {
+  width: 60%;
+  left: 20%;
+}
+
+.gc-nav-link.active {
+  color: var(--gc-gold-bright);
+}
+
+.gc-nav-link.active::after {
+  width: 50%;
+  left: 25%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--gc-gold-badge),
+    transparent
+  );
+}
+
+/* ── Action buttons ── */
+.gc-nav-actions {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.gc-cart-button,
+.gc-logout-button {
+  font-family: "Cinzel", serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+/* Cart — outlined style */
+.gc-cart-button {
+  background: transparent;
+  border: 1px solid var(--gc-gold-deep);
+  color: var(--gc-text-nav);
+  padding: 8px 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+.gc-cart-button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 50%, rgba(196,144,96,0.08) 100%);
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+
+.gc-cart-button:hover {
+  border-color: var(--gc-gold-bright);
+  color: var(--gc-gold-bright);
+  box-shadow: 0 0 16px rgba(196,144,96,0.15), inset 0 0 12px rgba(196,144,96,0.05);
+}
+
+.gc-cart-button:hover::before {
+  opacity: 1;
+}
+
+/* Logout — filled style */
+.gc-logout-button {
+  background: linear-gradient(135deg, #3a2015, #4a2e1a);
+  border: 1px solid var(--gc-gold-deep);
+  color: var(--gc-gold-bright);
+  padding: 8px 18px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
+}
+
+.gc-logout-button:hover {
+  background: linear-gradient(135deg, #4a2e1a, #5a3820);
+  border-color: var(--gc-gold-bright);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.07),
+    0 4px 16px rgba(0,0,0,0.4),
+    0 0 12px rgba(196,144,96,0.12);
+  transform: translateY(-1px);
+}
+
+.gc-cart-button:active,
+.gc-logout-button:active {
+  transform: translateY(0);
+}
+
+.gc-cart-icon,
+.gc-logout-icon {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.gc-cart-count {
+  background: var(--gc-gold-badge);
+  color: #1a0e08;
+  border-radius: 2px;
+  padding: 1px 6px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  font-family: "Cinzel", serif;
+  min-width: 20px;
+  text-align: center;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .gc-navbar-content {
+    grid-template-columns: auto 1fr auto;
+    gap: 1rem;
+  }
+
+  .gc-nav-link {
+    padding: 0.55rem 1rem;
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 800px) {
+  .gc-navbar-content {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    padding: 0.8rem 5%;
+    gap: 0.75rem;
+    min-height: unset;
+  }
+
+  .gc-logo {
+    justify-content: center;
+  }
+
+  .gc-nav-links {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .gc-nav-actions {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .gc-title-gondor,
+  .gc-title-chic {
+    font-size: 1.2rem;
+  }
+
+  .gc-nav-link {
+    padding: 0.4rem 0.7rem;
+    font-size: 0.7rem;
+  }
+
+  .gc-cart-button,
+  .gc-logout-button {
+    font-size: 0.7rem;
+    padding: 7px 12px;
+  }
+}

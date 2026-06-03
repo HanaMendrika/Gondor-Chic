@@ -1,0 +1,340 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cinzel+Decorative:wght@400;700&family=IM+Fell+English+SC&display=swap');
+
+:root {
+  --gc-deep: #120a05;
+  --gc-card: #2b1810;
+  --gc-card-mid: #3d2215;
+  --gc-card-light: #5a3322;
+  --gc-border: #7a4f2c;
+  --gc-border-light: #c49060;
+  --gc-gold: #e8c073;
+  --gc-gold-dim: #a07840;
+  --gc-text-title: #f0d8b0;
+  --gc-text-body: #c9a87a;
+  --gc-text-muted: #8a6844;
+  --gc-btn-bg: linear-gradient(160deg, #7a4d2e 0%, #4e2e18 100%);
+  --gc-btn-border: #b07848;
+  --gc-btn-text: #f0d8b0;
+  --gc-accent: #c8773a;
+  --gc-green: #5a7a4a;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+.scene {
+  perspective: 1000px;
+  width: 320px;
+}
+
+.gc-product-card {
+  position: relative;
+  width: 320px;
+  background: var(--gc-card);
+  border: 2px solid var(--gc-border);
+  border-radius: 14px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.4s cubic-bezier(0.23,1,0.32,1), box-shadow 0.4s ease;
+  box-shadow:
+    inset 0 0 0 1px rgba(196,144,96,0.15),
+    inset 0 0 60px rgba(0,0,0,0.5),
+    0 20px 50px rgba(0,0,0,0.8),
+    0 0 0 1px rgba(0,0,0,0.6);
+  background-image:
+    repeating-linear-gradient(55deg, rgba(0,0,0,0.07) 0px, rgba(0,0,0,0.07) 1px, transparent 1px, transparent 22px),
+    repeating-linear-gradient(-55deg, rgba(0,0,0,0.07) 0px, rgba(0,0,0,0.07) 1px, transparent 1px, transparent 22px);
+}
+
+.gc-product-card:hover {
+  box-shadow:
+    inset 0 0 0 1px rgba(196,144,96,0.25),
+    inset 0 0 60px rgba(0,0,0,0.4),
+    0 35px 70px rgba(0,0,0,0.9),
+    0 0 40px rgba(200,119,58,0.08);
+}
+
+.gc-product-card:hover .gc-product-image {
+  transform: scale(1.07);
+}
+
+.gc-product-card:hover .gc-quick-view-btn {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.gc-product-card:hover .gc-corner--tr {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.gc-image-container {
+  position: relative;
+  height: 240px;
+  overflow: hidden;
+  background: #080402;
+}
+
+.gc-image-container::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 50%, var(--gc-card) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.gc-product-image {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.23,1,0.32,1);
+  filter: saturate(0.85) contrast(1.05);
+}
+
+.gc-badge {
+  position: absolute;
+  top: 14px; right: 14px;
+  z-index: 3;
+  display: flex; flex-direction: column; align-items: flex-end; gap: 6px;
+}
+
+.gc-badge-pill {
+  font-family: 'Cinzel', serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: 20px;
+  border: 1px solid;
+  backdrop-filter: blur(6px);
+}
+
+.gc-badge-discount {
+  background: rgba(139,50,50,0.85);
+  color: #ffd060;
+  border-color: #ffd060;
+  animation: badge-pulse 2.5s ease-in-out infinite;
+}
+
+.gc-badge-new {
+  background: rgba(60,100,60,0.85);
+  color: #a8d888;
+  border-color: #6a9d5a;
+}
+
+@keyframes badge-pulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(255,208,96,0.0); }
+  50% { box-shadow: 0 0 10px 2px rgba(255,208,96,0.35); }
+}
+
+.gc-quick-view-btn {
+  position: absolute;
+  bottom: 16px; left: 50%;
+  transform: translateX(-50%) translateY(8px);
+  z-index: 3;
+  background: rgba(10,5,2,0.85);
+  color: var(--gc-gold);
+  border: 1px solid var(--gc-border-light);
+  padding: 8px 22px;
+  border-radius: 24px;
+  font-family: 'Cinzel', serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease, background 0.2s;
+  backdrop-filter: blur(8px);
+  white-space: nowrap;
+}
+
+.gc-quick-view-btn:hover {
+  background: rgba(90,50,20,0.9);
+  color: var(--gc-text-title);
+}
+
+.gc-info {
+  padding: 1.4rem 1.6rem 1.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+}
+
+.gc-divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gc-border-light), transparent);
+  opacity: 0.35;
+  margin-bottom: 1rem;
+}
+
+.gc-categories {
+  display: flex; flex-wrap: wrap; gap: 5px;
+  margin-bottom: 0.75rem;
+}
+
+.gc-cat-tag {
+  font-family: 'IM Fell English SC', serif;
+  font-size: 0.65rem;
+  color: var(--gc-text-muted);
+  background: rgba(0,0,0,0.3);
+  border: 1px solid rgba(196,144,96,0.2);
+  padding: 3px 9px;
+  border-radius: 10px;
+  letter-spacing: 0.04em;
+}
+
+.gc-product-name {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1.25rem;
+  color: var(--gc-text-title);
+  line-height: 1.25;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.02em;
+}
+
+.gc-product-desc {
+  font-family: 'IM Fell English SC', serif;
+  font-size: 0.85rem;
+  color: var(--gc-text-body);
+  line-height: 1.55;
+  opacity: 0.85;
+  margin-bottom: 1rem;
+}
+
+.gc-price-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.85rem;
+}
+
+.gc-price-group {
+  display: flex; align-items: baseline; gap: 8px;
+}
+
+.gc-price {
+  font-family: 'Cinzel', serif;
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: var(--gc-gold);
+  text-shadow: 0 0 18px rgba(232,192,115,0.25);
+}
+
+.gc-price-original {
+  font-family: 'Cinzel', serif;
+  font-size: 0.88rem;
+  color: var(--gc-text-muted);
+  text-decoration: line-through;
+}
+
+.gc-rating {
+  display: flex; align-items: center; gap: 3px;
+}
+
+.gc-star { font-size: 0.95rem; }
+.gc-star.full { color: #d4af37; }
+.gc-star.half { color: #d4af37; }
+.gc-star.empty { color: var(--gc-text-muted); opacity: 0.4; }
+
+.gc-rating-num {
+  font-family: 'Cinzel', serif;
+  font-size: 0.75rem;
+  color: var(--gc-text-muted);
+  margin-left: 3px;
+}
+
+.gc-stock {
+  display: flex; align-items: center; gap: 6px;
+  font-family: 'IM Fell English SC', serif;
+  font-size: 0.75rem;
+  color: var(--gc-green);
+  margin-bottom: 1rem;
+}
+
+.gc-stock-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--gc-green);
+  animation: stock-pulse 2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes stock-pulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(90,122,74,0); }
+  50% { box-shadow: 0 0 0 4px rgba(90,122,74,0.25); }
+}
+
+.gc-btn {
+  width: 100%;
+  padding: 13px;
+  background: var(--gc-btn-bg);
+  border: 1px solid var(--gc-btn-border);
+  border-radius: 40px;
+  color: var(--gc-btn-text);
+  font-family: 'Cinzel', serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.06);
+}
+
+.gc-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, rgba(255,255,255,0.07) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.gc-btn:hover:not(:disabled) {
+  border-color: var(--gc-gold-dim);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.6), 0 0 20px rgba(200,119,58,0.18), inset 0 1px 0 rgba(255,255,255,0.08);
+}
+
+.gc-btn:active:not(:disabled) {
+  transform: translateY(1px);
+  box-shadow: 0 3px 12px rgba(0,0,0,0.5);
+}
+
+.gc-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  background: #3a2215;
+}
+
+.gc-corner {
+  position: absolute;
+  width: 32px; height: 32px;
+  pointer-events: none;
+}
+
+.gc-corner::before, .gc-corner::after {
+  content: '';
+  position: absolute;
+  background: var(--gc-border-light);
+  opacity: 0.45;
+}
+.gc-corner::before { width: 100%; height: 1.5px; top: 50%; transform: translateY(-50%); }
+.gc-corner::after { width: 1.5px; height: 100%; left: 50%; transform: translateX(-50%); }
+
+.gc-corner--tl { top: 10px; left: 10px; }
+.gc-corner--bl { bottom: 10px; left: 10px; }
+.gc-corner--br { bottom: 10px; right: 10px; }
+.gc-corner--tr {
+  top: 10px; right: 10px;
+  opacity: 0;
+  transform: scale(0.5);
+  transition: opacity 0.4s, transform 0.4s;
+}
+
+.gc-product-card:hover .gc-corner--tl,
+.gc-product-card:hover .gc-corner--bl,
+.gc-product-card:hover .gc-corner--br {
+  opacity: 0.7;
+}

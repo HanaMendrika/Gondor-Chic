@@ -1,182 +1,212 @@
-import React, { useState } from 'react';
-import './ProductCard.css';
+import { useState } from 'react';
+import styles from './ProductCard.module.css';
 
-const ProductCard = ({ 
-  id, 
-  name, 
-  price, 
-  image, 
-  description, 
-  categories = [], // Changé: categories est maintenant un tableau
+const ProductCard = ({
+  id,
+  name,
+  price,
+  image,
+  description,
+  categories = [],
   rating = 4.5,
   maxRating = 5,
   onAddToCart,
   onQuickView,
   inStock = true,
   discount = null,
-  variant = 'default'
+  variant = 'default',
+  stock = null,
+  isNew = false,
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [imageError, setImageError] = useState(false);
 
-  const finalPrice = discount 
+  const isInStock = stock !== undefined ? stock > 0 : inStock;
+
+  const finalPrice = discount
     ? (price * (1 - discount / 100)).toFixed(2)
-    : price;
-  
+    : price?.toFixed?.(2) ?? price;
+
   const originalPrice = discount ? price : null;
+
+  const getCategoriesArray = () => {
+    if (Array.isArray(categories)) return categories;
+    if (typeof categories === 'string') return [categories];
+    return [];
+  };
+
+  const categoriesArray = getCategoriesArray();
 
   const renderRating = () => {
     const numericRating = parseFloat(rating) || 0;
     const fullStars = Math.floor(numericRating);
-    const hasHalfStar = (numericRating % 1) >= 0.5;
+    const hasHalfStar = numericRating % 1 >= 0.5;
     const emptyStars = maxRating - Math.ceil(numericRating);
-    
+
     return (
-      <div className="gc-product-rating">
+      <div className={styles['gc-rating']}>
         {[...Array(fullStars)].map((_, i) => (
-          <span key={`full-${i}`} className="gc-star gc-star-full">★</span>
+          <span key={`full-${i}`} className={`${styles['gc-star']} ${styles['gc-star--full']}`}>★</span>
         ))}
-        {hasHalfStar && <span key="half" className="gc-star gc-star-half">½</span>}
-        {[...Array(emptyStars)].map((_, i) => (
-          <span key={`empty-${i}`} className="gc-star gc-star-empty">☆</span>
+        {hasHalfStar && (
+          <span className={`${styles['gc-star']} ${styles['gc-star--half']}`}>½</span>
+        )}
+        {[...Array(Math.max(0, emptyStars))].map((_, i) => (
+          <span key={`empty-${i}`} className={`${styles['gc-star']} ${styles['gc-star--empty']}`}>☆</span>
         ))}
-        <span className="gc-rating-text">({numericRating.toFixed(1)})</span>
+        <span className={styles['gc-rating-num']}>({numericRating.toFixed(1)})</span>
       </div>
     );
   };
 
   const truncateText = (text, maxLength = 80) => {
     if (!text) return '';
-    if (text.length <= maxLength) return text;
-    return text.substring(0, maxLength) + '...';
+    return text.length <= maxLength ? text : text.substring(0, maxLength) + '…';
   };
 
   const handleAddToCart = () => {
-    if (onAddToCart && inStock) {
-      onAddToCart({ id, name, price: finalPrice, quantity: 1, image, categories });
+    if (onAddToCart && isInStock) {
+      onAddToCart({
+        id,
+        name,
+        price: parseFloat(finalPrice),
+        originalPrice,
+        quantity: 1,
+        image,
+        categories: categoriesArray,
+      });
     }
   };
 
   const handleQuickView = () => {
-    if (onQuickView && inStock) {
-      onQuickView(id);
-    }
-  };
-
-  const handleImageError = () => {
-    setImageError(true);
+    if (onQuickView) onQuickView(id);
   };
 
   const getImageSrc = () => {
-    if (imageError) return 'https://placehold.co/400x300/2a1a10/d4b896?text=No+Image';
+    if (imageError) return 'https://img.magnific.com/free-photo/dark-grunge-texture-background-with-scratches-stains_1048-18915.jpg?w=360';
+    if (!image) return 'https://img.magnific.com/free-photo/dark-grunge-texture-background-with-scratches-stains_1048-18915.jpg?w=360';
     return image;
   };
 
-  const getBadge = () => {
-    if (discount && inStock) {
-      return (
-        <div className="gc-product-badge gc-product-badge--discount">
+  const renderBadges = () => (
+    <div className={styles['gc-badge']}>
+      {discount && isInStock && (
+        <div className={`${styles['gc-badge-pill']} ${styles['gc-badge-pill--discount']}`}>
           -{discount}%
         </div>
-      );
-    }
-    if (!inStock) {
-      return (
-        <div className="gc-product-badge gc-product-badge--out-of-stock">
-          Out of Stock
+      )}
+      {isNew && isInStock && (
+        <div className={`${styles['gc-badge-pill']} ${styles['gc-badge-pill--new']}`}>
+          Nouveau
         </div>
-      );
-    }
-    return null;
-  };
+      )}
+      {!isInStock && (
+        <div className={`${styles['gc-badge-pill']} ${styles['gc-badge-pill--oos']}`}>
+          Rupture
+        </div>
+      )}
+    </div>
+  );
 
-  // Rendu des catégories multiples
   const renderCategories = () => {
-    if (!categories || categories.length === 0) return null;
+    if (!categoriesArray.length) return null;
     return (
-      <div className="gc-product-categories">
-        {categories.slice(0, 3).map((cat, index) => (
-          <span key={index} className="gc-category-tag">{cat}</span>
+      <div className={styles['gc-categories']}>
+        {categoriesArray.slice(0, 3).map((cat, i) => (
+          <span key={i} className={styles['gc-cat-tag']}>{cat}</span>
         ))}
-        {categories.length > 3 && (
-          <span className="gc-category-tag gc-category-more">+{categories.length - 3}</span>
+        {categoriesArray.length > 3 && (
+          <span className={`${styles['gc-cat-tag']} ${styles['gc-cat-tag--more']}`}>
+            +{categoriesArray.length - 3}
+          </span>
         )}
       </div>
     );
   };
 
+  const getCardClasses = () => {
+    const cls = [styles['gc-product-card']];
+    if (variant === 'compact') cls.push(styles['gc-product-card--compact']);
+    if (variant === 'featured') cls.push(styles['gc-product-card--featured']);
+    if (!isInStock) cls.push(styles['gc-product-card--out-of-stock']);
+    return cls.join(' ');
+  };
+
   return (
-    <div 
-      className={`gc-product-card gc-product-card--${variant} ${!inStock ? 'gc-product-card--out-of-stock' : ''}`}
+    <div
+      className={getCardClasses()}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="gc-product-image-container">
-        <img 
-          src={getImageSrc()} 
-          alt={name} 
-          className="gc-product-image"
+      {/* Image */}
+      <div className={styles['gc-image-container']}>
+        <img
+          src={getImageSrc()}
+          alt={name}
+          className={styles['gc-product-image']}
           loading="lazy"
-          onError={handleImageError}
+          onError={() => setImageError(true)}
         />
-        
-        {getBadge()}
-
-        {onQuickView && isHovered && inStock && (
-          <button 
-            className="gc-quick-view-btn"
-            onClick={handleQuickView}
-          >
-            Quick View
+        <div className={styles['gc-image-fade']} />
+        {renderBadges()}
+        {onQuickView && isHovered && isInStock && (
+          <button className={styles['gc-quick-view-btn']} onClick={handleQuickView}>
+            Vue Rapide
           </button>
         )}
       </div>
 
-      <div className="gc-product-info">
-        <h3 className="gc-product-name">{truncateText(name, 40)}</h3>
-        
+      {/* Info */}
+      <div className={styles['gc-info']}>
+        <div className={styles['gc-divider']} />
+
         {renderCategories()}
-        
+
+        <h3 className={styles['gc-product-name']}>
+          {truncateText(name, variant === 'compact' ? 30 : 40)}
+        </h3>
+
         {description && variant !== 'compact' && (
-          <p className="gc-product-description">
+          <p className={styles['gc-product-desc']}>
             {truncateText(description, variant === 'featured' ? 120 : 70)}
           </p>
         )}
 
-        <div className="gc-product-price-row">
-          <div className="gc-price-container">
-            <span className="gc-product-price">
-              ${typeof finalPrice === 'number' ? finalPrice.toFixed(2) : parseFloat(finalPrice).toFixed(2)}
+        <div className={styles['gc-price-row']}>
+          <div className={styles['gc-price-group']}>
+            <span className={styles['gc-price']}>
+              ${typeof finalPrice === 'number' ? finalPrice.toFixed(2) : finalPrice}
             </span>
             {originalPrice && (
-              <span className="gc-product-price--original">
-                ${typeof originalPrice === 'number' ? originalPrice.toFixed(2) : parseFloat(originalPrice).toFixed(2)}
+              <span className={styles['gc-price-original']}>
+                ${typeof originalPrice === 'number' ? originalPrice.toFixed(2) : originalPrice}
               </span>
             )}
           </div>
-          
           {rating > 0 && renderRating()}
         </div>
 
-        {inStock && variant !== 'compact' && (
-          <div className="gc-stock-indicator">
-            <span className="gc-stock-dot"></span>
-            In Stock
+        {isInStock && variant !== 'compact' && (
+          <div className={styles['gc-stock']}>
+            <span className={styles['gc-stock-dot']} />
+            {stock !== undefined ? `${stock} en stock` : 'En stock'}
           </div>
         )}
 
-        <button 
-          className="gc-product-button"
+        <button
+          className={styles['gc-btn']}
           onClick={handleAddToCart}
-          disabled={!inStock}
+          disabled={!isInStock}
         >
-          {!inStock ? 'Out of Stock' : 'Add to Cart'}
+          {isInStock ? 'Ajouter au panier' : 'Rupture de stock'}
         </button>
       </div>
 
-      <div className="gc-cross gc-cross--tl"></div>
-      <div className="gc-cross gc-cross--bl"></div>
-      <div className="gc-cross gc-cross--br"></div>
+      {/* Decorative corners */}
+      <div className={`${styles['gc-corner']} ${styles['gc-corner--tl']}`} />
+      <div className={`${styles['gc-corner']} ${styles['gc-corner--bl']}`} />
+      <div className={`${styles['gc-corner']} ${styles['gc-corner--br']}`} />
+      <div className={`${styles['gc-corner']} ${styles['gc-corner--tr']}`} />
     </div>
   );
 };

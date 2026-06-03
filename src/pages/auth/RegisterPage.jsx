@@ -1,53 +1,68 @@
-import React, { useState } from "react";
-import "./RegisterPage.css";
-import "./Style.css";
-
+import { useState } from "react";
+import styles from "./RegisterPage.module.css";
 import { useNavigate, Link } from "react-router-dom";
-
-
+import axios from "axios";
 
 export default function RegisterPage() {
   const [pseudo, setPseudo] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
 
-    console.log({
-      pseudo,
-      email,
-      password,
-    });
+    try {
+      const { data } = await axios.post("http://localhost:8080/api/auth/register", {
+        username: pseudo,
+        email,
+        password,
+      });
+
+      console.log("Inscription OK:", data);
+      localStorage.setItem("token", data.data.token);
+
+      navigate("/home");
+
+    } catch (err) {
+      console.error("Erreur:", err.response?.data);
+      setError(err.response?.data?.message || "Erreur lors de l'inscription.");
+    }
   };
 
   return (
-    <div className="auth-page">
-      <div className="auth-card">
+    <div className={styles["auth-page"]}>
+      <div className={styles["auth-card"]}>
 
         {/* LEFT SIDE */}
-        <div className="auth-form-side">
+        <div className={styles["auth-form-side"]}>
 
-          <div className="brand">
-            <h2 className="gc-title">
-                <div>
-                    <span className="gc-title-gondor">G</span>ondor{" "}
-                    <span className="gc-title-of">or</span>{" "}
-                </div>
-                <span className="gc-title-chic">Chic</span>
+          {/* Decorative crosses */}
+          <div className={`${styles["gc-cross"]} ${styles["gc-cross--tl"]}`}></div>
+          <div className={`${styles["gc-cross"]} ${styles["gc-cross--tr"]}`}></div>
+
+          <div className={styles["brand"]}>
+            <h2 className={styles["gc-title"]}>
+              <div>
+                <span className={styles["gc-title-gondor"]}>G</span>ondor{" "}
+                <span className={styles["gc-title-or"]}>or</span>{" "}
+              </div>
+              <span className={styles["gc-title-chic"]}>Chic</span>
             </h2>
-                <p className="gc-subtitle">« La Forge de la Montagne »</p>
-                <div className="gc-divider" />
+            <p className={styles["gc-subtitle"]}>« La Forge de la Montagne »</p>
+            <div className={styles["gc-divider"]} />
           </div>
 
-          <div className="form-wrapper">
+          <div className={styles["form-wrapper"]}>
             <h1>Créer un compte</h1>
-            <p className="subtitle">
+            <p className={styles["subtitle"]}>
               Rejoignez la cité et accédez aux trésors de la montagne.
             </p>
 
             <form onSubmit={handleSubmit}>
-              <div className="field">
+              <div className={styles["field"]}>
                 <label>Pseudo</label>
                 <input
                   type="text"
@@ -57,7 +72,7 @@ export default function RegisterPage() {
                 />
               </div>
 
-              <div className="field">
+              <div className={styles["field"]}>
                 <label>Email</label>
                 <input
                   type="email"
@@ -67,7 +82,7 @@ export default function RegisterPage() {
                 />
               </div>
 
-              <div className="field">
+              <div className={styles["field"]}>
                 <label>Mot de passe</label>
                 <input
                   type="password"
@@ -77,12 +92,14 @@ export default function RegisterPage() {
                 />
               </div>
 
-              <button type="submit">
+              {error && <p className={styles["gc-error"]}>{error}</p>}
+
+              <button type="submit" className={styles["gc-submit-btn"]}>
                 Créer un compte
               </button>
             </form>
 
-            <p className="login-link">
+            <p className={styles["login-link"]}>
               Déjà un compte ? <Link to="/login">Se connecter</Link>
             </p>
           </div>
@@ -90,8 +107,8 @@ export default function RegisterPage() {
         </div>
 
         {/* RIGHT SIDE */}
-        <div className="auth-showcase">
-          <div className="showcase-content">
+        <div className={styles["auth-showcase"]}>
+          <div className={styles["showcase-content"]}>
             <h2>
               Les plus belles créations
               <br />
@@ -103,10 +120,9 @@ export default function RegisterPage() {
               par les maîtres artisans de Gondor or Chic.
             </p>
 
-            <div className="preview-card">
-              <div className="preview-header" />
-
-              <div className="preview-grid">
+            <div className={styles["preview-card"]}>
+              <div className={styles["preview-header"]} />
+              <div className={styles["preview-grid"]}>
                 <div />
                 <div />
                 <div />
