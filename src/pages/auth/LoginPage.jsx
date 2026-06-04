@@ -1,71 +1,95 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import axios from "axios";
 import styles from "./LoginPage.module.css";
 
 export default function LoginPage() {
-  const [pseudo, setPseudo] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (pseudo === "pseudo" && password === "password") {
-      setError("");
+    setError("");
+    setIsLoading(true);
+
+    try {
+      const { data } = await axios.post("http://localhost:8080/api/auth/login", {
+        email,
+        password,
+      });
+
+      console.log("Login OK:", data);
+      localStorage.setItem("token", data.data.token);
+
       navigate("/home");
-    } else {
-      setError("Identifiant ou mot de passe incorrect.");
+
+    } catch (err) {
+      console.error("Erreur:", err.response?.data);
+      setError(err.response?.data?.message || "Identifiant ou mot de passe incorrect.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
-    <div className="gc-overlay">
-      <div className="gc-card">
-        <span className="gc-cross gc-cross--tl" />
-        <span className="gc-cross gc-cross--tr" />
-        <span className="gc-cross gc-cross--bl" />
-        <span className="gc-cross gc-cross--br" />
+    <div className={styles["gc-overlay"]}>
+      <div className={styles["gc-card"]}>
+        <span className={`${styles["gc-cross"]} ${styles["gc-cross--tl"]}`} />
+        <span className={`${styles["gc-cross"]} ${styles["gc-cross--tr"]}`} />
+        <span className={`${styles["gc-cross"]} ${styles["gc-cross--bl"]}`} />
+        <span className={`${styles["gc-cross"]} ${styles["gc-cross--br"]}`} />
 
-        <div className="gc-header">
-          <h1 className="gc-title">
-            <span className="gc-title-gondor">G</span>ondor{" "}
-            <span className="gc-title-of">or</span>{" "}
-            <span className="gc-title-chic">Chic</span>
+        <div className={styles["gc-header"]}>
+          <h1 className={styles["gc-title"]}>
+            <span className={styles["gc-title-gondor"]}>G</span>ondor{" "}
+            <span className={styles["gc-title-of"]}>or</span>{" "}
+            <span className={styles["gc-title-chic"]}>Chic</span>
           </h1>
-          <p className="gc-subtitle">« La Forge de la Montagne »</p>
-          <div className="gc-divider" />
+          <p className={styles["gc-subtitle"]}>« La Forge de la Montagne »</p>
+          <div className={styles["gc-divider"]} />
         </div>
 
-        <form className="gc-form" onSubmit={handleSubmit}>
-          <div className="gc-field">
-            <label className="gc-label" htmlFor="pseudo">Pseudo</label>
+        <form className={styles["gc-form"]} onSubmit={handleSubmit}>
+          <div className={styles["gc-field"]}>
+            <label className={styles["gc-label"]} htmlFor="email">Email</label>
             <input
-              id="pseudo"
-              className="gc-input"
-              type="text"
-              placeholder="Votre identifiant nain..."
-              value={pseudo}
-              onChange={(e) => setPseudo(e.target.value)}
-              autoComplete="username"
+              id="email"
+              className={styles["gc-input"]}
+              type="email"
+              placeholder="Votre email nain..."
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              autoComplete="email"
+              required
             />
           </div>
 
-          <div className="gc-field">
-            <label className="gc-label" htmlFor="password">Mot de passe</label>
+          <div className={styles["gc-field"]}>
+            <label className={styles["gc-label"]} htmlFor="password">Mot de passe</label>
             <input
               id="password"
-              className="gc-input"
+              className={styles["gc-input"]}
               type="password"
               placeholder="••••••••"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               autoComplete="current-password"
+              required
             />
           </div>
 
-          {error && <p className="gc-error">{error}</p>}
+          {error && <p className={styles["gc-error"]}>{error}</p>}
 
-          <button className="gc-button" type="submit">S'identifier</button>
+          <button 
+            className={`${styles["gc-button"]} ${isLoading ? styles["gc-button--loading"] : ""}`} 
+            type="submit"
+            disabled={isLoading}
+          >
+            {isLoading ? "Connexion..." : "S'identifier"}
+          </button>
 
           <p className={styles["gc-register"]}>
             Pas encore de compte ?{" "}
@@ -73,13 +97,9 @@ export default function LoginPage() {
               S'enregistrer
             </Link>
           </p>
-
         </form>
 
-
-
-
-        <footer className="gc-footer">
+        <footer className={styles["gc-footer"]}>
           <p>Grimthars • Forge-Cité</p>
           <p>Gouvernance de la Montagne</p>
         </footer>
