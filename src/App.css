@@ -59,6 +59,16 @@ html, body, #root {
   cursor: pointer;
 }
 
+.hl-naine .sample-text .hl {
+    background: linear-gradient(90deg, rgba(190, 140, 40, 0.3) 0%, rgba(190, 140, 40, 0.15) 100%);
+    border-bottom: 1.5px solid #d0a030;
+    border-radius: 1px;
+    color: #e8c050;
+    padding: 0 3px;
+    box-shadow: 0 0 8px rgba(200, 160, 40, 0.25);
+    font-weight: 600;
+}
+
 @keyframes dwarfPulse {
   0%, 100% { 
     filter: drop-shadow(0 0 2px rgba(255,215,0,0.4));

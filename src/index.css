@@ -222,7 +222,7 @@ body {
   margin-top: 0.4rem;
   width: 100%;
   padding: 1rem;
-  background-color: var(--gc-btn-bg);
+  background: var(--gc-btn-bg);
   border: 2px solid var(--gc-btn-border);
   border-radius: 40px;
   cursor: pointer;

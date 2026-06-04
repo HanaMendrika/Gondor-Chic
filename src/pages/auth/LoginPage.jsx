@@ -1,32 +1,20 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import axios from "axios";
+import styles from "./LoginPage.module.css";
 
 export default function LoginPage() {
-  const [email, setEmail] = useState("");
+  const [pseudo, setPseudo] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setError("");
-
-    try {
-      const { data } = await axios.post("http://localhost:8080/api/auth/login", {
-        email,
-        password,
-      });
-
-      // data.data contient l'AuthResponse (token, etc.)
-      console.log("Login OK:", data);
-      localStorage.setItem("token", data.data.token);
-
+    if (pseudo === "pseudo" && password === "password") {
+      setError("");
       navigate("/home");
-
-    } catch (err) {
-      console.error("Erreur:", err.response?.data);
-      setError(err.response?.data?.message || "Identifiant ou mot de passe incorrect.");
+    } else {
+      setError("Identifiant ou mot de passe incorrect.");
     }
   };
 
@@ -50,15 +38,15 @@ export default function LoginPage() {
 
         <form className="gc-form" onSubmit={handleSubmit}>
           <div className="gc-field">
-            <label className="gc-label" htmlFor="email">Email</label>
+            <label className="gc-label" htmlFor="pseudo">Pseudo</label>
             <input
-              id="email"
+              id="pseudo"
               className="gc-input"
-              type="email"
-              placeholder="Votre email nain..."
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              autoComplete="email"
+              type="text"
+              placeholder="Votre identifiant nain..."
+              value={pseudo}
+              onChange={(e) => setPseudo(e.target.value)}
+              autoComplete="username"
             />
           </div>
 
@@ -79,13 +67,17 @@ export default function LoginPage() {
 
           <button className="gc-button" type="submit">S'identifier</button>
 
-          <p className="gc-register">
+          <p className={styles["gc-register"]}>
             Pas encore de compte ?{" "}
-            <Link to="/register" className="gc-register-link">
+            <Link to="/register" className={styles["gc-register-link"]}>
               S'enregistrer
             </Link>
           </p>
+
         </form>
+
+
+
 
         <footer className="gc-footer">
           <p>Grimthars • Forge-Cité</p>
