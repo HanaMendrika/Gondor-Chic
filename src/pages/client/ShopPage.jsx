@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import Navbar from "../../components/common/Navbar";
 import ProductList from "../../components/products/ProductList";
+import ProductCard from '../../components/products/ProductCard';
 import productService from "../../services/productService";
 import styles from './ShopPage.module.css';
 
@@ -58,7 +59,6 @@ export default function ShopPage({ onLogout }) {
 
   const handleAddToCart = (product) => {
     setCartCount(prev => prev + 1);
-    // You would typically show a toast notification here instead of alert
     console.log(`⚔️ ${product.name} ajouté au panier !`);
   };
 
@@ -69,6 +69,8 @@ export default function ShopPage({ onLogout }) {
   const handleQuickView = (productId) => {
     console.log("Vue rapide du produit:", productId);
   };
+
+  var username = localStorage.getItem("userName");
 
   const handleFilterChange = (newFilters) => {
     console.log('Changement de filtres:', newFilters);
@@ -87,6 +89,9 @@ export default function ShopPage({ onLogout }) {
     }));
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  // Récupérer les 3 premiers produits
+  const TodayProduct = products.slice(0, 1);
 
   if (loading && products.length === 0) {
     return (
@@ -138,7 +143,7 @@ export default function ShopPage({ onLogout }) {
         <div className={styles["gc-hero-overlay"]}></div>
         <div className={styles["gc-hero-content"]}>
           <div className={styles["gc-hero-runes-left"]}>ᚱ ᚨ ᚢ</div>
-          <h1>La Grande Forge-Marché</h1>
+          <h1>Bienvenue à la forge, {username || "guerrier"}!</h1>
           <div className={styles["gc-hero-divider"]}>
             <span className={styles["gc-hero-cross"]}></span>
             <span className={styles["gc-hero-line"]}></span>
@@ -146,8 +151,32 @@ export default function ShopPage({ onLogout }) {
           </div>
           <p>Équipez-vous pour la gloire de la Montagne</p>
           <div className={styles["gc-hero-runes-right"]}>ᚾ ᛟ ᛗ</div>
+
         </div>
       </div>
+          {/* Affichage des 3 premiers produits */}
+          <section className={styles["gc-featured-products"]}>
+            <h2>Équipements du jour</h2>
+            <div className={styles["gc-featured-grid"]}>
+              {TodayProduct.map((product) => (
+                <ProductCard
+                  key={product.id}
+                  id={product.id}
+                  name={product.name}
+                  price={product.price}
+                  image={"https://buxtrade.de/cdn/shop/files/mandeln_4_1200x.jpg?v=1778618805"}
+                  description={product.description}
+                  categories={product.categories || [product.category]}
+                  rating={product.rating || 4.5}
+                  inStock={product.stock > 0}
+                  stock={product.stock}
+                  discount={product.discount}
+                  onAddToCart={handleAddToCart}
+                  onQuickView={handleQuickView}
+                />
+              ))}
+            </div>
+          </section>
 
       <div className={styles["gc-shop-container"]}>
         <ProductList 

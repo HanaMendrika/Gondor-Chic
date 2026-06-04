@@ -23,6 +23,7 @@ export default function LoginPage() {
 
       console.log("Login OK:", data);
       localStorage.setItem("token", data.data.token);
+      localStorage.setItem("userName", data.data.username);
 
       navigate("/home");
 

@@ -26,6 +26,7 @@ export default function RegisterPage() {
 
       console.log("Inscription OK:", data);
       localStorage.setItem("token", data.data.token);
+      localStorage.setItem("userName", data.data.username);
 
       // Add subtle delay for better UX
       setTimeout(() => navigate("/home"), 500);
