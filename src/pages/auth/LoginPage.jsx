@@ -1,19 +1,32 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import axios from "axios";
 
 export default function LoginPage() {
-  const [pseudo, setPseudo] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (pseudo === "pseudo" && password === "password") {
-      setError("");
+    setError("");
+
+    try {
+      const { data } = await axios.post("http://localhost:8080/api/auth/login", {
+        email,
+        password,
+      });
+
+      // data.data contient l'AuthResponse (token, etc.)
+      console.log("Login OK:", data);
+      localStorage.setItem("token", data.data.token);
+
       navigate("/home");
-    } else {
-      setError("Identifiant ou mot de passe incorrect.");
+
+    } catch (err) {
+      console.error("Erreur:", err.response?.data);
+      setError(err.response?.data?.message || "Identifiant ou mot de passe incorrect.");
     }
   };
 
@@ -37,15 +50,15 @@ export default function LoginPage() {
 
         <form className="gc-form" onSubmit={handleSubmit}>
           <div className="gc-field">
-            <label className="gc-label" htmlFor="pseudo">Pseudo</label>
+            <label className="gc-label" htmlFor="email">Email</label>
             <input
-              id="pseudo"
+              id="email"
               className="gc-input"
-              type="text"
-              placeholder="Votre identifiant nain..."
-              value={pseudo}
-              onChange={(e) => setPseudo(e.target.value)}
-              autoComplete="username"
+              type="email"
+              placeholder="Votre email nain..."
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              autoComplete="email"
             />
           </div>
 
@@ -67,16 +80,12 @@ export default function LoginPage() {
           <button className="gc-button" type="submit">S'identifier</button>
 
           <p className="gc-register">
-  Pas encore de compte ?{" "}
-  <Link to="/register" className="gc-register-link">
-    S'enregistrer
-  </Link>
-</p>
-
+            Pas encore de compte ?{" "}
+            <Link to="/register" className="gc-register-link">
+              S'enregistrer
+            </Link>
+          </p>
         </form>
-
-
-
 
         <footer className="gc-footer">
           <p>Grimthars • Forge-Cité</p>
