@@ -69,11 +69,11 @@ export default function RegisterPage() {
 
           <div className={styles["brand"]}>
             <div className={styles["crown-icon"]}>
-              <svg width="40" height="30" viewBox="0 0 40 30" fill="none">
-                <path d="M5 25 L5 8 L12 15 L20 5 L28 15 L35 8 L35 25 Z" stroke="#e8c080" strokeWidth="1.5" fill="none"/>
-                <path d="M8 25 L8 12 L13 18 L20 10 L27 18 L32 12 L32 25 Z" fill="#d4b896" opacity="0.3"/>
-                <circle cx="20" cy="10" r="2" fill="#e8c080"/>
-              </svg>
+                        <img
+                          className={styles["gc-logo-img"]}
+                          src="./favicon.ico"
+                          alt="Gondor Chic Logo"
+                        />
             </div>
             <h2 className={styles["gc-title"]}>
               <span className={styles["gc-title-gondor"]}>G</span>ondor{" "}

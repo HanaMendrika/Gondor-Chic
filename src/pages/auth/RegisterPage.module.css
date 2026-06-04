@@ -155,7 +155,6 @@
 .crown-icon {
   display: flex;
   justify-content: center;
-  margin-bottom: 16px;
   animation: crownGlow 3s ease-in-out infinite;
 }
 
@@ -181,7 +180,6 @@
   font-size: 0.85rem;
   letter-spacing: 0.2em;
   color: var(--gc-text-body);
-  margin-top: 8px;
 }
 
 .gc-divider {
@@ -234,7 +232,7 @@
   font-family: "Cinzel", serif;
   color: var(--gc-text-body);
   font-style: italic;
-  margin-bottom: 36px;
+  margin-bottom: 10px;
   font-size: 0.95rem;
   letter-spacing: 0.3px;
   opacity: 0.9;
@@ -527,7 +525,7 @@
   backdrop-filter: blur(4px);
   padding: 6px 14px;
   border-radius: 40px;
-  font-size: 0.7rem;
+  font-size: 1.0rem;
   letter-spacing: 0.15em;
   color: var(--gc-gold-light);
   margin-bottom: 24px;
@@ -752,4 +750,13 @@
   .gc-title-gondor {
     font-size: 2rem;
   }
+}
+
+.gc-logo-img {
+  z-index: 1;
+  width: 102px;
+  height: 102px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--gc-brown-dark);
 }
